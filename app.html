@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful - Your Wellness Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #1a1a1a;
+            color: #f5f5f5;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #cccccc;
+            font-size: 1.1rem;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: #cccccc;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            background: rgba(255, 255, 255, 0.05);
+            color: #cccccc;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .tab-button:hover,
+        .tab-button.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .card h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        /* Daily Quote Section */
+        .quote-container {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .quote {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .author {
+            color: #cccccc;
+            font-size: 1rem;
+        }
+
+        .quote-actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Breathing Exercise */
+        .breathing-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .breathing-circle {
+            width: 150px;
+            height: 150px;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 4s ease-in-out;
+            cursor: pointer;
+        }
+
+        .breathing-circle.inhale {
+            transform: scale(1.3);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
+
+        .breathing-circle.exhale {
+            transform: scale(1);
+            background: transparent;
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Meditation Timer */
+        .timer-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .timer-display {
+            font-size: 4rem;
+            color: #ffffff;
+            margin: 2rem 0;
+            font-weight: 300;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .preset-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .preset-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #cccccc;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .preset-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        /* Mood Tracker */
+        .mood-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .mood-item {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .mood-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .mood-item.selected {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #ffffff;
+        }
+
+        .mood-emoji {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Gratitude Journal */
+        .journal-entry {
+            width: 100%;
+            min-height: 120px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        .journal-entry::placeholder {
+            color: #888;
+        }
+
+        .journal-entry:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Grounding Exercise */
+        .grounding-step {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border-left: 4px solid #ffffff;
+        }
+
+        .grounding-step h4 {
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .grounding-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            padding: 0.5rem;
+            color: #ffffff;
+            font-family: inherit;
+            margin-top: 0.5rem;
+        }
+
+        .grounding-input::placeholder {
+            color: #888;
+        }
+
+        /* Buttons */
+        .btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn.primary {
+            background: #ffffff;
+            color: #1a1a1a;
+        }
+
+        .btn.primary:hover {
+            background: #f0f0f0;
+        }
+
+        /* Progress Tracker */
+        .progress-container {
+            margin: 2rem 0;
+        }
+
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #ffffff;
+            transition: width 0.3s ease;
+        }
+
+        /* Collection Section */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .collection-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .collection-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .collection-quote {
+            font-style: italic;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .collection-author {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+
+        .collection-date {
+            color: #888888;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #cccccc;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .delete-btn:hover {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ffffff;
+        }
+
+        .empty-collection {
+            text-align: center;
+            padding: 3rem;
+            color: #cccccc;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .nav-tabs {
+                gap: 0.3rem;
+                margin-bottom: 2rem;
+            }
+            
+            .tab-button {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+                border-radius: 15px;
+            }
+            
+            .timer-display {
+                font-size: 2.5rem;
+            }
+            
+            .mood-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.5rem;
+            }
+            
+            .mood-item {
+                padding: 0.5rem;
+            }
+            
+            .mood-emoji {
+                font-size: 1.5rem;
+                margin-bottom: 0.3rem;
+            }
+            
+            .mood-item span:last-child {
+                font-size: 0.8rem;
+            }
+            
+            .back-link {
+                position: relative;
+                top: auto;
+                left: auto;
+                display: block;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .quote {
+                font-size: 1.1rem;
+            }
+            
+            .quote-container {
+                padding: 2rem 1rem;
+            }
+            
+            .quote-actions {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 200px;
+                padding: 0.7rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .breathing-circle {
+                width: 120px;
+                height: 120px;
+                font-size: 1rem;
+            }
+            
+            .timer-controls {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .preset-buttons {
+                gap: 0.3rem;
+            }
+            
+            .preset-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .grounding-step {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+            
+            .grounding-step h4 {
+                font-size: 1rem;
+            }
+            
+            .journal-entry {
+                min-height: 80px;
+                font-size: 0.9rem;
+            }
+            
+            .collection-item {
+                padding: 1rem;
+            }
+            
+            .collection-quote {
+                font-size: 1rem;
+            }
+            
+            .delete-btn {
+                width: 25px;
+                height: 25px;
+                font-size: 0.9rem;
+            }
+            
+            .progress-item {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            
+            .progress-bar {
+                width: 80%;
+                height: 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem;
+            }
+            
+            .nav-tabs {
+                gap: 0.2rem;
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+            
+            .tab-button {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.7rem;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            
+            .mood-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.3rem;
+            }
+            
+            .mood-item {
+                padding: 0.3rem;
+            }
+            
+            .mood-emoji {
+                font-size: 1.2rem;
+            }
+            
+            .mood-item span:last-child {
+                font-size: 0.7rem;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .quote {
+                font-size: 1rem;
+            }
+            
+            .timer-display {
+                font-size: 2rem;
+            }
+            
+            .breathing-circle {
+                width: 100px;
+                height: 100px;
+                font-size: 0.9rem;
+            }
+            
+            .preset-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .preset-btn {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.7rem;
+                min-width: 50px;
+            }
+            
+            .card {
+                padding: 1rem;
+            }
+            
+            .grounding-step {
+                padding: 0.8rem;
+            }
+            
+            .collection-item {
+                padding: 0.8rem;
+            }
+            
+            .delete-btn {
+                top: 0.5rem;
+                right: 0.5rem;
+                width: 20px;
+                height: 20px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Better emoji and text handling */
+        .mood-emoji {
+            line-height: 1;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .mood-item span:last-child {
+            display: block;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        /* Ensure text doesn't overflow */
+        .quote, .collection-quote {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Better button spacing on mobile */
+        @media (max-width: 768px) {
+            .quote-actions .btn,
+            .timer-controls .btn {
+                margin: 0.2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Home</a>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Your Wellness Journey</h1>
+            <p>Take a moment for yourself. Choose what feels right today.</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="tab-button active" onclick="showSection('daily')">Daily Dose</button>
+            <button class="tab-button" onclick="showSection('breathe')">Breathe</button>
+            <button class="tab-button" onclick="showSection('meditate')">Meditate</button>
+            <button class="tab-button" onclick="showSection('mood')">Mood</button>
+            <button class="tab-button" onclick="showSection('gratitude')">Gratitude</button>
+            <button class="tab-button" onclick="showSection('grounding')">Grounding</button>
+            <button class="tab-button" onclick="showSection('collection')">Collection</button>
+            <button class="tab-button" onclick="showSection('progress')">Progress</button>
+        </div>
+
+        <!-- Daily Dose Section -->
+        <div id="daily" class="content-section active">
+            <div class="card">
+                <div class="quote-container">
+                    <div class="quote" id="daily-quote">
+                        "You are braver than you believe, stronger than you seem, and smarter than you think."
+                    </div>
+                    <div class="author" id="quote-author">— A.A. Milne</div>
+                    <div class="quote-actions">
+                        <button class="btn" onclick="getNewQuote()">New Quote</button>
+                        <button class="btn" onclick="saveQuote()">Save Quote</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Today's Affirmation</h3>
+                <p id="daily-affirmation">I am worthy of love, happiness, and all the good things life has to offer.</p>
+                <button class="btn" onclick="getNewAffirmation()" style="margin-top: 1rem;">New Affirmation</button>
+            </div>
+        </div>
+
+        <!-- Breathing Section -->
+        <div id="breathe" class="content-section">
+            <div class="card">
+                <div class="breathing-container">
+                    <h3>Guided Breathing Exercise</h3>
+                    <p>Click the circle to begin. Follow the rhythm to calm your mind.</p>
+                    <div class="breathing-circle" id="breathing-circle" onclick="toggleBreathing()">
+                        Start
+                    </div>
+                    <p id="breathing-instruction">Click to begin your breathing exercise</p>
+                    <div style="margin-top: 2rem;">
+                        <button class="btn" onclick="setBreathingPattern(4, 4)">4-4 Breathing</button>
+                        <button class="btn" onclick="setBreathingPattern(4, 7, 8)">4-7-8 Technique</button>
+                        <button class="btn" onclick="setBreathingPattern(6, 6)">Box Breathing</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meditation Section -->
+        <div id="meditate" class="content-section">
+            <div class="card">
+                <div class="timer-container">
+                    <h3>Meditation Timer</h3>
+                    <div class="preset-buttons">
+                        <button class="preset-btn" onclick="setTimer(300)">5 min</button>
+                        <button class="preset-btn" onclick="setTimer(600)">10 min</button>
+                        <button class="preset-btn" onclick="setTimer(900)">15 min</button>
+                        <button class="preset-btn" onclick="setTimer(1200)">20 min</button>
+                        <button class="preset-btn" onclick="setTimer(1800)">30 min</button>
+                    </div>
+                    <div class="timer-display" id="timer-display">05:00</div>
+                    <div class="timer-controls">
+                        <button class="btn primary" id="timer-btn" onclick="toggleTimer()">Start</button>
+                        <button class="btn" onclick="resetTimer()">Reset</button>
+                    </div>
+                    <p id="timer-status">Choose a duration and begin your practice</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mood Tracker Section -->
+        <div id="mood" class="content-section">
+            <div class="card">
+                <h3>How are you feeling today?</h3>
+                <div class="mood-grid">
+                    <div class="mood-item" onclick="selectMood('amazing', '🤩')">
+                        <span class="mood-emoji">🤩</span>
+                        <span>Amazing</span>
+                    </div>
+                    <div class="mood-item" onclick="selectMood('happy', '😊')">
+                        <span class="mood-emoji">😊</span>
+                        <span>Happy</span>
+                    </div>
+                    <div class="mood-item" onclick="selectMood('good', '🙂')">
+                        <span class="mood-emoji">🙂</span>
+                        <span>Good</span>
+                    </div>
+                    <div class="mood-item" onclick="selectMood('okay', '😐')">
+                        <span class="mood-emoji">😐</span>
+                        <span>Okay</span>
+                    </div>
+                    <div class="mood-item" onclick="selectMood('low', '😔')">
+                        <span class="mood-emoji">😔</span>
+                        <span>Low</span>
+                    </div>
+                    <div class="mood-item" onclick="selectMood('anxious', '😰')">
+                        <span class="mood-emoji">😰</span>
+                        <span>Anxious</span>
+                    </div>
+                    <div class="mood-item" onclick="selectMood('stressed', '😤')">
+                        <span class="mood-emoji">😤</span>
+                        <span>Stressed</span>
+                    </div>
+                    <div class="mood-item" onclick="selectMood('tired', '😴')">
+                        <span class="mood-emoji">😴</span>
+                        <span>Tired</span>
+                    </div>
+                </div>
+                <div id="mood-feedback" style="margin-top: 1rem; text-align: center; color: #cccccc;"></div>
+            </div>
+        </div>
+
+        <!-- Gratitude Journal Section -->
+        <div id="gratitude" class="content-section">
+            <div class="card">
+                <h3>Gratitude Journal</h3>
+                <p style="margin-bottom: 1rem; color: #cccccc;">What are you grateful for today? Write down three things, big or small.</p>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #ffffff;">1. I'm grateful for...</label>
+                    <textarea class="journal-entry" id="gratitude1" placeholder="Something that brought you joy today..."></textarea>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #ffffff;">2. I appreciate...</label>
+                    <textarea class="journal-entry" id="gratitude2" placeholder="A person who made a difference..."></textarea>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #ffffff;">3. I'm thankful for...</label>
+                    <textarea class="journal-entry" id="gratitude3" placeholder="A moment of peace or beauty..."></textarea>
+                </div>
+                
+                <button class="btn primary" onclick="saveGratitude()">Save Today's Gratitude</button>
+                <div id="gratitude-saved" style="margin-top: 1rem; color: #cccccc; text-align: center;"></div>
+            </div>
+        </div>
+
+        <!-- Grounding Exercise Section -->
+        <div id="grounding" class="content-section">
+            <div class="card">
+                <h3>5-4-3-2-1 Grounding Technique</h3>
+                <p style="margin-bottom: 2rem; color: #cccccc;">When feeling overwhelmed, use this technique to reconnect with the present moment.</p>
+                
+                <div class="grounding-step">
+                    <h4>5 things you can SEE</h4>
+                    <p style="color: #cccccc;">Look around and name 5 things you can see right now</p>
+                    <input type="text" class="grounding-input" placeholder="What do you see?" id="see-input">
+                </div>
+                
+                <div class="grounding-step">
+                    <h4>4 things you can TOUCH</h4>
+                    <p style="color: #cccccc;">Notice 4 things you can physically feel</p>
+                    <input type="text" class="grounding-input" placeholder="What can you touch?" id="touch-input">
+                </div>
+                
+                <div class="grounding-step">
+                    <h4>3 things you can HEAR</h4>
+                    <p style="color: #cccccc;">Listen carefully and identify 3 sounds</p>
+                    <input type="text" class="grounding-input" placeholder="What do you hear?" id="hear-input">
+                </div>
+                
+                <div class="grounding-step">
+                    <h4>2 things you can SMELL</h4>
+                    <p style="color: #cccccc;">Take a deep breath and notice 2 scents</p>
+                    <input type="text" class="grounding-input" placeholder="What can you smell?" id="smell-input">
+                </div>
+                
+                <div class="grounding-step">
+                    <h4>1 thing you can TASTE</h4>
+                    <p style="color: #cccccc;">Focus on 1 taste in your mouth</p>
+                    <input type="text" class="grounding-input" placeholder="What can you taste?" id="taste-input">
+                </div>
+                
+                <button class="btn primary" onclick="completeGrounding()">Complete Exercise</button>
+                <div id="grounding-complete" style="margin-top: 1rem; color: #cccccc; text-align: center;"></div>
+            </div>
+        </div>
+
+        <!-- Collection Section -->
+        <div id="collection" class="content-section">
+            <div class="card">
+                <h3>Your Saved Quotes</h3>
+                <p style="margin-bottom: 2rem; color: #cccccc;">A collection of quotes that resonated with you.</p>
+                
+                <div id="collection-container" class="collection-grid">
+                    <!-- Saved quotes will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div id="progress" class="content-section">
+            <div class="card">
+                <h3>Your Wellness Journey</h3>
+                <div class="progress-container">
+                    <div class="progress-item">
+                        <span>Daily Check-ins</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="checkin-progress" style="width: 0%"></div>
+                        </div>
+                        <span id="checkin-count">0/7</span>
+                    </div>
+                    <div class="progress-item">
+                        <span>Breathing Exercises</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="breathing-progress" style="width: 0%"></div>
+                        </div>
+                        <span id="breathing-count">0</span>
+                    </div>
+                    <div class="progress-item">
+                        <span>Meditation Sessions</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="meditation-progress" style="width: 0%"></div>
+                        </div>
+                        <span id="meditation-count">0</span>
+                    </div>
+                    <div class="progress-item">
+                        <span>Gratitude Entries</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="gratitude-progress" style="width: 0%"></div>
+                        </div>
+                        <span id="gratitude-entries">0</span>
+                    </div>
+                </div>
+                <button class="btn" onclick="resetProgress()">Reset Progress</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mental health quotes and affirmations
+        const quotes = [
+            { text: "You are braver than you believe, stronger than you seem, and smarter than you think.", author: "A.A. Milne" },
+            { text: "Mental health is not a destination, but a process. It's about how you drive, not where you're going.", author: "Noam Shpancer" },
+            { text: "You don't have to be positive all the time. It's perfectly okay to feel sad, angry, annoyed, frustrated, scared, or anxious.", author: "Lori Deschene" },
+            { text: "Healing isn't about erasing your past or your pain. It's about learning to live with both in a way that doesn't hurt you anymore.", author: "Unknown" },
+            { text: "Your mental health is a priority. Your happiness is essential. Your self-care is a necessity.", author: "Unknown" },
+            { text: "Progress, not perfection, is the goal. Every small step forward is worth celebrating.", author: "Unknown" },
+            { text: "You are allowed to be both a masterpiece and a work in progress simultaneously.", author: "Sophia Bush" },
+            { text: "The strongest people are not those who show strength in front of us, but those who win battles we know nothing about.", author: "Unknown" },
+            { text: "Self-compassion is simply giving the same kindness to ourselves that we would give to others.", author: "Christopher Germer" },
+            { text: "You are enough just as you are. Each emotion you feel, everything in your life, everything you do or do not do... where you are and who you are right now is enough.", author: "Haemin Sunim" }
+        ];
+
+        const affirmations = [
+            "I am worthy of love and respect.",
+            "I choose peace over worry.",
+            "I am in control of my thoughts and emotions.",
+            "Every day, I am becoming a better version of myself.",
+            "I deserve happiness and joy in my life.",
+            "I am resilient and can overcome any challenge.",
+            "I trust in my ability to make good decisions.",
+            "I am grateful for this moment and this day.",
+            "I choose to focus on what I can control.",
+            "I am enough, exactly as I am right now.",
+            "I treat myself with kindness and compassion.",
+            "I am growing stronger with each passing day.",
+            "I have the power to create positive change in my life.",
+            "I am surrounded by love and support.",
+            "I trust the process of my healing journey."
+        ];
+
+        // Global variables
+        let breathingActive = false;
+        let breathingInterval;
+        let breathingPattern = { inhale: 4, hold: 0, exhale: 4 };
+        let timerActive = false;
+        let timerInterval;
+        let timerSeconds = 300;
+        let currentMood = null;
+
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-button').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // If collection section is shown, load saved quotes
+            if (sectionId === 'collection') {
+                loadSavedQuotes();
+            }
+        }
+
+        // Daily quotes
+        function getDailyQuote() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            return quotes[dayOfYear % quotes.length];
+        }
+
+        function getNewQuote() {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('daily-quote').textContent = `"${randomQuote.text}"`;
+            document.getElementById('quote-author').textContent = `— ${randomQuote.author}`;
+        }
+
+        function saveQuote() {
+            const quoteText = document.getElementById('daily-quote').textContent;
+            const authorText = document.getElementById('quote-author').textContent;
+            
+            // Clean up the text (remove quotes and dashes)
+            const cleanQuote = quoteText.replace(/"/g, '');
+            const cleanAuthor = authorText.replace('— ', '');
+            
+            const savedQuotes = JSON.parse(localStorage.getItem('savedQuotes') || '[]');
+            
+            // Check if quote already exists to avoid duplicates
+            const quoteExists = savedQuotes.some(q => q.quote === cleanQuote);
+            
+            if (!quoteExists) {
+                savedQuotes.push({ 
+                    quote: cleanQuote, 
+                    author: cleanAuthor, 
+                    date: new Date().toDateString(),
+                    id: Date.now() // Unique ID for deletion
+                });
+                localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
+                alert('Quote saved to your collection!');
+            } else {
+                alert('This quote is already in your collection.');
+            }
+        }
+
+        function loadSavedQuotes() {
+            const container = document.getElementById('collection-container');
+            const savedQuotes = JSON.parse(localStorage.getItem('savedQuotes') || '[]');
+            
+            // Clear container
+            container.innerHTML = '';
+            
+            if (savedQuotes.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-collection">
+                        <p>You haven't saved any quotes yet.</p>
+                        <p>Go to the Daily Dose section and click "Save Quote" to add quotes to your collection.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Sort quotes by date (newest first)
+            savedQuotes.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Create quote cards
+            savedQuotes.forEach(item => {
+                const quoteCard = document.createElement('div');
+                quoteCard.className = 'collection-item';
+                quoteCard.innerHTML = `
+                    <div class="collection-quote">"${item.quote}"</div>
+                    <div class="collection-author">— ${item.author}</div>
+                    <div class="collection-date">Saved on ${item.date}</div>
+                    <button class="delete-btn" onclick="deleteQuote(${item.id})">×</button>
+                `;
+                container.appendChild(quoteCard);
+            });
+        }
+
+        function deleteQuote(id) {
+            if (confirm('Are you sure you want to remove this quote from your collection?')) {
+                const savedQuotes = JSON.parse(localStorage.getItem('savedQuotes') || '[]');
+                const updatedQuotes = savedQuotes.filter(quote => quote.id !== id);
+                localStorage.setItem('savedQuotes', JSON.stringify(updatedQuotes));
+                loadSavedQuotes();
+            }
+        }
+
+        function getNewAffirmation() {
+            const randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
+            document.getElementById('daily-affirmation').textContent = randomAffirmation;
+        }
+
+        // Breathing exercises
+        function toggleBreathing() {
+            const circle = document.getElementById('breathing-circle');
+            const instruction = document.getElementById('breathing-instruction');
+            
+            if (!breathingActive) {
+                breathingActive = true;
+                circle.textContent = 'Breathe';
+                startBreathingCycle();
+                updateProgress('breathing');
+            } else {
+                breathingActive = false;
+                clearInterval(breathingInterval);
+                circle.className = 'breathing-circle';
+                circle.textContent = 'Start';
+                instruction.textContent = 'Click to begin your breathing exercise';
+            }
+        }
+
+        function setBreathingPattern(inhale, hold = 0, exhale = null) {
+            breathingPattern = {
+                inhale: inhale,
+                hold: hold,
+                exhale: exhale || inhale
+            };
+            
+            if (breathingActive) {
+                clearInterval(breathingInterval);
+                startBreathingCycle();
+            }
+        }
+
+        function startBreathingCycle() {
+            const circle = document.getElementById('breathing-circle');
+            const instruction = document.getElementById('breathing-instruction');
+            let phase = 'inhale';
+            
+            function cycle() {
+                if (!breathingActive) return;
+                
+                if (phase === 'inhale') {
+                    instruction.textContent = `Breathe in for ${breathingPattern.inhale} seconds...`;
+                    circle.className = 'breathing-circle inhale';
+                    circle.textContent = 'Inhale';
+                    
+                    setTimeout(() => {
+                        if (breathingPattern.hold > 0) {
+                            phase = 'hold';
+                        } else {
+                            phase = 'exhale';
+                        }
+                    }, breathingPattern.inhale * 1000);
+                    
+                } else if (phase === 'hold') {
+                    instruction.textContent = `Hold for ${breathingPattern.hold} seconds...`;
+                    circle.textContent = 'Hold';
+                    
+                    setTimeout(() => {
+                        phase = 'exhale';
+                    }, breathingPattern.hold * 1000);
+                    
+                } else {
+                    instruction.textContent = `Breathe out for ${breathingPattern.exhale} seconds...`;
+                    circle.className = 'breathing-circle exhale';
+                    circle.textContent = 'Exhale';
+                    
+                    setTimeout(() => {
+                        phase = 'inhale';
+                    }, breathingPattern.exhale * 1000);
+                }
+            }
+            
+            cycle();
+            const totalCycleTime = (breathingPattern.inhale + breathingPattern.hold + breathingPattern.exhale) * 1000;
+            breathingInterval = setInterval(cycle, totalCycleTime);
+        }
+
+        // Meditation timer
+        function setTimer(seconds) {
+            timerSeconds = seconds;
+            updateTimerDisplay();
+            document.getElementById('timer-status').textContent = 'Ready to begin your meditation';
+        }
+
+        function toggleTimer() {
+            const btn = document.getElementById('timer-btn');
+            const status = document.getElementById('timer-status');
+            
+            if (!timerActive) {
+                timerActive = true;
+                btn.textContent = 'Pause';
+                status.textContent = 'Meditation in progress... Focus on your breath';
+                startTimer();
+                updateProgress('meditation');
+            } else {
+                timerActive = false;
+                btn.textContent = 'Resume';
+                status.textContent = 'Meditation paused';
+                clearInterval(timerInterval);
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timerSeconds > 0) {
+                    timerSeconds--;
+                    updateTimerDisplay();
+                } else {
+                    // Timer finished
+                    timerActive = false;
+                    clearInterval(timerInterval);
+                    document.getElementById('timer-btn').textContent = 'Start';
+                    document.getElementById('timer-status').textContent = 'Meditation complete! Well done 🧘';
+                    
+                    // Play completion sound (if available)
+                    try {
+                        const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT');
+                        audio.play();
+                    } catch (e) {
+                        // Silent fail if audio doesn't work
+                    }
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            timerActive = false;
+            clearInterval(timerInterval);
+            timerSeconds = 300;
+            updateTimerDisplay();
+            document.getElementById('timer-btn').textContent = 'Start';
+            document.getElementById('timer-status').textContent = 'Choose a duration and begin your practice';
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            document.getElementById('timer-display').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Mood tracking
+        function selectMood(mood, emoji) {
+            // Remove previous selection
+            document.querySelectorAll('.mood-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Add selection to clicked item
+            event.currentTarget.classList.add('selected');
+            currentMood = mood;
+            
+            // Save mood
+            const today = new Date().toDateString();
+            const moods = JSON.parse(localStorage.getItem('moods') || '{}');
+            moods[today] = { mood, emoji, timestamp: new Date().toISOString() };
+            localStorage.setItem('moods', JSON.stringify(moods));
+            
+            // Show feedback
+            const feedback = document.getElementById('mood-feedback');
+            const responses = {
+                amazing: "That's wonderful! Keep riding this positive wave! 🌟",
+                happy: "So glad you're feeling happy today! 😊",
+                good: "A good day is a gift. Enjoy it! 🌸",
+                okay: "It's okay to have okay days. You're doing fine. 💙",
+                low: "I see you're having a tough time. Be gentle with yourself. 🤗",
+                anxious: "Anxiety is hard. Try some breathing exercises. You've got this. 🌱",
+                stressed: "Stress happens. Take a moment to breathe and reset. 🧘",
+                tired: "Rest is important. Listen to what your body needs. 😴"
+            };
+            
+            feedback.textContent = responses[mood];
+            updateProgress('checkin');
+        }
+
+        // Gratitude journal
+        function saveGratitude() {
+            const gratitude1 = document.getElementById('gratitude1').value;
+            const gratitude2 = document.getElementById('gratitude2').value;
+            const gratitude3 = document.getElementById('gratitude3').value;
+            
+            if (!gratitude1 && !gratitude2 && !gratitude3) {
+                alert('Please write at least one thing you\'re grateful for.');
+                return;
+            }
+            
+            const today = new Date().toDateString();
+            const gratitudeEntries = JSON.parse(localStorage.getItem('gratitudeEntries') || '{}');
+            gratitudeEntries[today] = {
+                entries: [gratitude1, gratitude2, gratitude3].filter(entry => entry.trim()),
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('gratitudeEntries', JSON.stringify(gratitudeEntries));
+            
+            document.getElementById('gratitude-saved').textContent = 'Your gratitude has been saved! 🙏';
+            updateProgress('gratitude');
+            
+            // Clear the form
+            setTimeout(() => {
+                document.getElementById('gratitude1').value = '';
+                document.getElementById('gratitude2').value = '';
+                document.getElementById('gratitude3').value = '';
+                document.getElementById('gratitude-saved').textContent = '';
+            }, 3000);
+        }
+
+        // Grounding exercise
+        function completeGrounding() {
+            const inputs = ['see-input', 'touch-input', 'hear-input', 'smell-input', 'taste-input'];
+            const filledInputs = inputs.filter(id => document.getElementById(id).value.trim());
+            
+            if (filledInputs.length < 3) {
+                alert('Try to fill in at least 3 senses to get the full benefit of this exercise.');
+                return;
+            }
+            
+            document.getElementById('grounding-complete').textContent = 
+                'Great job! You\'ve successfully grounded yourself in the present moment. 🌱';
+            
+            // Clear inputs after a delay
+            setTimeout(() => {
+                inputs.forEach(id => document.getElementById(id).value = '');
+                document.getElementById('grounding-complete').textContent = '';
+            }, 5000);
+        }
+
+        // Progress tracking
+        function updateProgress(activity) {
+            const today = new Date().toDateString();
+            const progress = JSON.parse(localStorage.getItem('progress') || '{}');
+            
+            if (!progress[today]) {
+                progress[today] = {
+                    checkins: 0,
+                    breathing: 0,
+                    meditation: 0,
+                    gratitude: 0
+                };
+            }
+            
+            if (activity === 'checkin') {
+                progress[today].checkins = 1;
+            } else if (activity === 'breathing') {
+                progress[today].breathing++;
+            } else if (activity === 'meditation') {
+                progress[today].meditation++;
+            } else if (activity === 'gratitude') {
+                progress[today].gratitude++;
+            }
+            
+            localStorage.setItem('progress', JSON.stringify(progress));
+            displayProgress();
+        }
+
+        function displayProgress() {
+            const progress = JSON.parse(localStorage.getItem('progress') || '{}');
+            const last7Days = [];
+            
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toDateString();
+                last7Days.push(progress[dateStr] || { checkins: 0, breathing: 0, meditation: 0, gratitude: 0 });
+            }
+            
+            const totals = last7Days.reduce((acc, day) => ({
+                checkins: acc.checkins + day.checkins,
+                breathing: acc.breathing + day.breathing,
+                meditation: acc.meditation + day.meditation,
+                gratitude: acc.gratitude + day.gratitude
+            }), { checkins: 0, breathing: 0, meditation: 0, gratitude: 0 });
+            
+            // Update progress bars
+            document.getElementById('checkin-progress').style.width = `${(totals.checkins / 7) * 100}%`;
+            document.getElementById('checkin-count').textContent = `${totals.checkins}/7`;
+            
+            document.getElementById('breathing-progress').style.width = `${Math.min(totals.breathing / 10, 1) * 100}%`;
+            document.getElementById('breathing-count').textContent = totals.breathing;
+            
+            document.getElementById('meditation-progress').style.width = `${Math.min(totals.meditation / 7, 1) * 100}%`;
+            document.getElementById('meditation-count').textContent = totals.meditation;
+            
+            document.getElementById('gratitude-progress').style.width = `${Math.min(totals.gratitude / 7, 1) * 100}%`;
+            document.getElementById('gratitude-entries').textContent = totals.gratitude;
+        }
+
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset your progress? This cannot be undone.')) {
+                localStorage.removeItem('progress');
+                displayProgress();
+            }
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load daily quote
+            const dailyQuote = getDailyQuote();
+            document.getElementById('daily-quote').textContent = `"${dailyQuote.text}"`;
+            document.getElementById('quote-author').textContent = `— ${dailyQuote.author}`;
+            
+            // Load daily affirmation
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            const dailyAffirmation = affirmations[dayOfYear % affirmations.length];
+            document.getElementById('daily-affirmation').textContent = dailyAffirmation;
+            
+            // Display progress
+            displayProgress();
+            
+            // Update timer display
+            updateTimerDisplay();
+        });
+    </script>
+</body>
+</html>

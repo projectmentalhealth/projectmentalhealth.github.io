@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://2f5c8vn9-5501.inc1.devtunnels.ms/sitemap.xml

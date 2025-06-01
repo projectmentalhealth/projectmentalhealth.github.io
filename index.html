@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Mindful - Free Mental Wellness App | Meditation, Anxiety Relief & Mindfulness Tools</title>
+    <meta name="description" content="Free mental wellness app with meditation timer, breathing exercises, mood tracking, gratitude journal, and anxiety relief tools. Start your mindfulness journey today.">
+    <meta name="keywords" content="mental health app, meditation app, mindfulness, anxiety relief, stress management, breathing exercises, mood tracker, gratitude journal, free wellness tools">
+    <meta name="author" content="Mindful Wellness">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourdomain.com/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Mindful - Free Mental Wellness App">
+    <meta property="og:description" content="Free mental wellness app with meditation timer, breathing exercises, mood tracking, and anxiety relief tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:image" content="https://yourdomain.com/images/mindful-og-image.jpg">
+    <meta property="og:site_name" content="Mindful - Mental Wellness Companion">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mindful - Free Mental Wellness App">
+    <meta name="twitter:description" content="Free mental wellness app with meditation timer, breathing exercises, and mindfulness tools.">
+    <meta name="twitter:image" content="https://yourdomain.com/images/mindful-twitter-card.jpg">
+    
+    <!-- Structured Data for Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Mindful - Mental Wellness Companion",
+      "description": "A comprehensive mental wellness platform offering mindfulness tools, meditation timers, mood tracking, and evidence-based mental health resources.",
+      "url": "https://yourdomain.com",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Meditation Timer",
+        "Breathing Exercises", 
+        "Mood Tracking",
+        "Gratitude Journal",
+        "Grounding Techniques",
+        "Mental Health Resources"
+      ],
+      "screenshot": "https://yourdomain.com/images/app-screenshot.jpg",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mindful Wellness",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://yourdomain.com/images/logo.png"
+        }
+      }
+    }
+    </script>
+
+    <!-- Additional SEO Elements -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <link rel="alternate" type="application/rss+xml" title="Mindful Blog RSS" href="/blog/rss.xml">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #f5f5f5;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 300;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 6rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #cccccc;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.9s forwards;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+            background: #f0f0f0;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 4rem;
+            color: #ffffff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .feature-card p {
+            color: #cccccc;
+            font-size: 1.1rem;
+        }
+
+        /* Content Sections for SEO */
+        .content-section {
+            padding: 4rem 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .content-section h3 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin: 2rem 0 1rem;
+        }
+
+        .content-section p {
+            color: #cccccc;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .content-section ul {
+            color: #cccccc;
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .stat-item p {
+            color: #cccccc;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .footer-links {
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: #cccccc;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .features h2 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Breathing animation for calm effect */
+        .breathing-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+            animation: breathe 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="breathing-bg"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Mindful</a>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="blog.html">Resources</a></li>
+                    <li><a href="app.html">Start Journey</a></li>
+                </ul>
+            </nav>
+
+            <section class="hero">
+                <h1>Find Your Inner Peace</h1>
+                <p>A minimalist approach to mental wellness. Discover daily practices, mindfulness techniques, and gentle guidance for a calmer mind.</p>
+                <a href="app.html" class="cta-button">Begin Your Journey</a>
+            </section>
+        </div>
+    </header>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Gentle Tools for Mental Wellness</h2>
+            <div class="features-grid">
+                <article class="feature-card fade-in-up">
+                    <span class="feature-icon">🌱</span>
+                    <h3>Daily Mindfulness</h3>
+                    <p>Start each day with carefully curated quotes and affirmations designed to nurture your mental well-being and promote positive thinking.</p>
+                </article>
+                <article class="feature-card fade-in-up">
+                    <span class="feature-icon">🫁</span>
+                    <h3>Breathing Exercises</h3>
+                    <p>Guided breathing techniques including 4-7-8 breathing, box breathing, and simple patterns to reduce anxiety, improve focus, and find calm.</p>
+                </article>
+                <article class="feature-card fade-in-up">
+                    <span class="feature-icon">📝</span>
+                    <h3>Gratitude Journal</h3>
+                    <p>Cultivate positivity through daily gratitude practice with gentle prompts and reflection exercises proven to improve mental health.</p>
+                </article>
+                <article class="feature-card fade-in-up">
+                    <span class="feature-icon">🧘</span>
+                    <h3>Meditation Timer</h3>
+                    <p>Customizable meditation sessions from 5 to 30 minutes with ambient sounds to support your mindfulness practice and stress reduction.</p>
+                </article>
+                <article class="feature-card fade-in-up">
+                    <span class="feature-icon">💭</span>
+                    <h3>Mood Tracking</h3>
+                    <p>Simple, non-judgmental mood tracking to help you understand emotional patterns and celebrate progress in your mental health journey.</p>
+                </article>
+                <article class="feature-card fade-in-up">
+                    <span class="feature-icon">🌊</span>
+                    <h3>Grounding Techniques</h3>
+                    <p>Evidence-based grounding exercises like the 5-4-3-2-1 technique to help you stay present and manage overwhelming emotions.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Content Sections -->
+    <section class="content-section" id="about">
+        <div class="container">
+            <h2>Why Choose Mindful for Your Mental Wellness Journey?</h2>
+            
+            <h3>Evidence-Based Mental Health Tools</h3>
+            <p>Our mental wellness app is built on scientifically-proven techniques used by therapists and mental health professionals worldwide. Every feature is designed to support your emotional well-being through evidence-based practices.</p>
+
+            <h3>Free and Accessible Mental Health Support</h3>
+            <p>Mental wellness shouldn't be a luxury. Mindful provides free access to essential mental health tools including meditation timers, breathing exercises, mood tracking, and anxiety relief techniques. No subscriptions, no hidden costs.</p>
+
+            <h3>Privacy-First Approach</h3>
+            <p>Your mental health data stays private. All information is stored locally on your device, ensuring complete privacy and security for your personal wellness journey.</p>
+
+            <h3>Key Benefits of Regular Mindfulness Practice:</h3>
+            <ul>
+                <li>Reduced anxiety and stress levels</li>
+                <li>Improved emotional regulation</li>
+                <li>Better sleep quality</li>
+                <li>Enhanced focus and concentration</li>
+                <li>Increased self-awareness</li>
+                <li>Greater resilience to life challenges</li>
+                <li>Improved relationships and communication</li>
+            </ul>
+
+            <h3>Who Can Benefit from Mindful?</h3>
+            <p>Whether you're dealing with daily stress, anxiety, depression, or simply want to improve your overall mental well-being, Mindful provides gentle, effective tools for everyone. Our app is suitable for beginners and experienced practitioners alike.</p>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-in-up">
+                    <h3>5</h3>
+                    <p>Minutes daily can make a difference</p>
+                </div>
+                <div class="stat-item fade-in-up">
+                    <h3>∞</h3>
+                    <p>Unlimited access to wellness tools</p>
+                </div>
+                <div class="stat-item fade-in-up">
+                    <h3>0</h3>
+                    <p>Judgment, only support</p>
+                </div>
+                <div class="stat-item fade-in-up">
+                    <h3>24/7</h3>
+                    <p>Available whenever you need it</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Mindful. A gentle space for mental wellness. Take care of yourself.</p>
+            <div class="footer-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/contact">Contact</a>
+                <a href="blog.html">Blog</a>
+                <a href="/sitemap.xml">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Gentle mouse movement effect
+        document.addEventListener('mousemove', (e) => {
+            const floatingElements = document.querySelectorAll('.floating-element');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            floatingElements.forEach((element, index) => {
+                const speed = (index + 1) * 0.5;
+                const xPos = (x - 0.5) * speed;
+                const yPos = (y - 0.5) * speed;
+                
+                element.style.transform = `translate(${xPos}px, ${yPos}px)`;
+            });
+        });
+
+        // Track page views for SEO analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('config', 'GA_MEASUREMENT_ID', {
+                page_title: 'Mindful - Mental Wellness App',
+                page_location: window.location.href
+            });
+        }
+    </script>
+</body>
+</html>
